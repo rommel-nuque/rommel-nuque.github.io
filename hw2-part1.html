@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Homework #2 - Part 1</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #2 Basic Operations - Part 1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2>Homework #2 Basic Operations - Part 1</h2>
+
+    <script>
+        const xy_element = document.createElement('strong');
+        xy_element.textContent = 'xy';
+        xy_element.style.fontFamily = '"Times New Roman", serif';
+        xy_element.style.color = 'red';
+
+        const twelve_element = document.createElement('span');
+        twelve_element.textContent = ' 12'; // separate with space
+        twelve_element.style.fontFamily = 'Arial, sans-serif';
+        twelve_element.style.color = 'blue';
+
+        const eighty_nine_element = document.createElement('i');
+        eighty_nine_element.textContent = ' 89'; // separate with space
+        eighty_nine_element.style.fontFamily = 'Impact, sans-serif';
+        eighty_nine_element.style.color = 'green';
+        eighty_nine_element.style.fontStyle = 'italic';
+
+        // Append all elements to the document body
+        document.body.appendChild(xy_element);
+        document.body.appendChild(twelve_element);
+        document.body.appendChild(eighty_nine_element);
+    </script>
+
+    <br><br>
+    <a href="./hw2.html">Home</a>
+</body>
+
+</html>

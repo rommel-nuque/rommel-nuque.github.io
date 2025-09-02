@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .value-cell {
+            text-align: right;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Currency Converter</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Currency</th>
+                <th>Rate (USD to 1 unit)</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Euro</td>
+                <td>0.92</td>
+                <td><input type="text" id="eurValue" readonly class="value-cell"></td>
+            </tr>
+            <tr>
+                <td>Canadian Dollar</td>
+                <td>1.38</td>
+                <td><input type="text" id="cadValue" readonly class="value-cell"></td>
+            </tr>
+            <tr>
+                <td>Hong Kong Dollar</td>
+                <td>7.81</td>
+                <td><input type="text" id="hkValue" readonly class="value-cell"></td>
+            </tr>
+            <tr>
+                <td>Japanese Yen</td>
+                <td>156.73</td>
+                <td><input type="text" id="jpyValue" readonly class="value-cell"></td>
+            </tr>
+            <tr>
+                <td>Mexican Peso</td>
+                <td>18.41</td>
+                <td><input type="text" id="mexValue" readonly class="value-cell"></td>
+            </tr>
+            <tr>
+                <td>U.S. Dollars (USD)</td>
+                <td>1.00</td>
+                <td><input type="text" id="usdAmount" onkeyup="convertCurrency()"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function convertCurrency() {
+            const usdAmount = parseFloat(document.getElementById('usdAmount').value);
+
+            if (isNaN(usdAmount)) {
+                document.getElementById('eurValue').value = '';
+                document.getElementById('cadValue').value = '';
+                document.getElementById('hkValue').value = '';
+                document.getElementById('jpyValue').value = '';
+                document.getElementById('mexValue').value = '';
+                return;
+            }
+
+            const rates = {
+                eur: 0.92,
+                cad: 1.38,
+                hk: 7.81,
+                jpy: 156.73,
+                mex: 18.41
+            };
+
+            document.getElementById('eurValue').value = (usdAmount * rates.eur).toFixed(2);
+            document.getElementById('cadValue').value = (usdAmount * rates.cad).toFixed(2);
+            document.getElementById('hkValue').value = (usdAmount * rates.hk).toFixed(2);
+            document.getElementById('jpyValue').value = (usdAmount * rates.jpy).toFixed(2);
+            document.getElementById('mexValue').value = (usdAmount * rates.mex).toFixed(2);
+        }
+    </script>
+</body>
+
+</html>

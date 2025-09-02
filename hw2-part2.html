@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Homework #2 Basic Operations - Part 2</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #2 Basic Operations - Part 2">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2>Homework #2 Basic Operations - Part 2</h2>
+    <form id="numberForm">
+        <label for="num1">Number Input 1:</label>
+        <input type="number" id="num1" required>
+
+        <label for="num2">Number Input 2:</label>
+        <input type="number" id="num2" required>
+
+        <label for="num3">Number Input 3:</label>
+        <input type="number" id="num3" required>
+
+        <button type="button" id="processButton" onclick="processForm()">Process Data</button>
+        <button type="button" id="clearButton" onclick="resetForm()">Reset</button>
+
+    <textarea id="resultsArea" readonly></textarea>
+
+    <script>
+        function processForm() {
+            let num1InputElement = document.getElementById('num1');
+            let num2InputElement = document.getElementById('num2');
+            let num3InputElement = document.getElementById('num3');
+            let resultsArea = document.getElementById('resultsArea');
+
+            let num1 = parseFloat(num1InputElement.value);
+            let num2 = parseFloat(num2InputElement.value);
+            let num3 = parseFloat(num3InputElement.value);
+
+            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                resultsArea.value = "Error: Please enter valid numbers in all input fields.";
+                resultsArea.classList.add('error');
+                return;
+            }
+
+            resultsArea.classList.remove('error'); // Clear error styling if valid input
+
+            let sum = num1 + num2 + num3;
+            let average = sum / 3;
+            let product = num1 * num2 * num3;
+            let smallest = Math.min(num1, num2, num3);
+            let largest = Math.max(num1, num2, num3);
+
+            resultsArea.value = `
+Sum: ${sum}
+Average: ${average.toFixed(2)}
+Product: ${product}
+Smallest Number: ${smallest}
+Largest Number: ${largest}
+            `;
+        };
+
+        function resetForm() {
+            document.getElementById('num1').value = '';
+            document.getElementById('num2').value = '';
+            document.getElementById('num3').value = '';
+            document.getElementById('resultsArea').value = '';
+            document.getElementById('resultsArea').classList.remove('error');
+        };
+    </script>
+
+    <br><br>
+    <a href="./hw2.html">Home</a>
+
+</body>
+
+</html>
