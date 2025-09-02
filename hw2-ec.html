@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
+    <title>Homework #2 Basic Operations - Extra Credit (Currency Converter)</title>
     <style>
         table {
             width: 50%;
@@ -29,6 +29,35 @@
             padding: 5px;
         }
     </style>
+
+    <script>
+        function convertCurrency() {
+            const usdAmount = parseFloat(document.getElementById('usdAmount').value);
+
+            if (isNaN(usdAmount)) {
+                document.getElementById('eurValue').value = '';
+                document.getElementById('cadValue').value = '';
+                document.getElementById('hkValue').value = '';
+                document.getElementById('jpyValue').value = '';
+                document.getElementById('mexValue').value = '';
+                return;
+            }
+
+            const rates = {
+                eur: 0.92,
+                cad: 1.38,
+                hk: 7.81,
+                jpy: 156.73,
+                mex: 18.41
+            };
+
+            document.getElementById('eurValue').value = (usdAmount * rates.eur).toFixed(2);
+            document.getElementById('cadValue').value = (usdAmount * rates.cad).toFixed(2);
+            document.getElementById('hkValue').value = (usdAmount * rates.hk).toFixed(2);
+            document.getElementById('jpyValue').value = (usdAmount * rates.jpy).toFixed(2);
+            document.getElementById('mexValue').value = (usdAmount * rates.mex).toFixed(2);
+        }
+    </script>
 </head>
 
 <body>
@@ -75,34 +104,8 @@
         </tbody>
     </table>
 
-    <script>
-        function convertCurrency() {
-            const usdAmount = parseFloat(document.getElementById('usdAmount').value);
-
-            if (isNaN(usdAmount)) {
-                document.getElementById('eurValue').value = '';
-                document.getElementById('cadValue').value = '';
-                document.getElementById('hkValue').value = '';
-                document.getElementById('jpyValue').value = '';
-                document.getElementById('mexValue').value = '';
-                return;
-            }
-
-            const rates = {
-                eur: 0.92,
-                cad: 1.38,
-                hk: 7.81,
-                jpy: 156.73,
-                mex: 18.41
-            };
-
-            document.getElementById('eurValue').value = (usdAmount * rates.eur).toFixed(2);
-            document.getElementById('cadValue').value = (usdAmount * rates.cad).toFixed(2);
-            document.getElementById('hkValue').value = (usdAmount * rates.hk).toFixed(2);
-            document.getElementById('jpyValue').value = (usdAmount * rates.jpy).toFixed(2);
-            document.getElementById('mexValue').value = (usdAmount * rates.mex).toFixed(2);
-        }
-    </script>
+    <br><br>
+    <a href="./hw2.html">Home</a>
 </body>
 
 </html>
