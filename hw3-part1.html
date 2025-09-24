@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Student Grades (Homework 3 - Part 1)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #3 Functions - Part 1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h1>Student Grades (Homework 3 - Part 1)</h1>
+
+    <form id="gradeForm">
+        <label for="homework">Homework Average:</label>
+        <input type="number" id="homework" name="homework" min="0" max="100" required>
+
+        <label for="midterm">Mid-Term Exam Score:</label>
+        <input type="number" id="midterm" name="midterm" min="0" max="100" required>
+
+        <label for="final">Final Exam Score:</label>
+        <input type="number" id="final" name="final" min="0" max="100" required>
+
+        <label for="participation">Participation:</label>
+        <input type="number" id="participation" name="participation" min="0" max="100" required>
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        const form = document.getElementById('gradeForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const hw = parseInt(document.getElementById('homework').value);
+            const mid = parseInt(document.getElementById('midterm').value);
+            const final = parseInt(document.getElementById('final').value);
+            const participation = parseInt(document.getElementById('participation').value);
+
+            if (isNaN(hw) || isNaN(mid) || isNaN(final) || isNaN(participation) ||
+                hw < 0 || hw > 100 ||
+                mid < 0 || mid > 100 ||
+                final < 0 || final > 100 ||
+                participation < 0 || participation > 100
+            ) {
+                resultDiv.innerHTML = "<span class='error'>Please enter valid numbers between 0 and 100 for all fields.</span>";
+                return;
+            }
+
+            // Calculate final average
+            const finalAvg = Math.round(0.5 * hw + 0.2 * mid + 0.2 * final + 0.1 * participation);
+
+            // Determine letter grade
+            let letterGrade = '';
+            if (finalAvg >= 90) letterGrade = 'A';
+            else if (finalAvg >= 80) letterGrade = 'B';
+            else if (finalAvg >= 70) letterGrade = 'C';
+            else if (finalAvg >= 60) letterGrade = 'D';
+            else letterGrade = 'F';
+
+            let message = `Final Average: ${finalAvg}<br>Letter Grade: ${letterGrade}`;
+
+            if (letterGrade === 'D' || letterGrade === 'F') {
+                message += `<br><strong>Student must retake the course.</strong>`;
+            }
+
+            resultDiv.innerHTML = message;
+        });
+
+        function clearForm() {
+            form.reset();
+            resultDiv.innerHTML = '';
+        }
+    </script>
+
+    <br><br>
+    <a href="./hw3.html">Home</a>
+</body>
+
+</html>

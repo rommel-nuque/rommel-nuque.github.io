@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sales Commission Calculator (Homework 3 - Part 2)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #3 Functions - Part 2">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h1>Sales Commission Calculator (Homework 3 - Part 2)</h1>
+
+    <form id="salesForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item#</th>
+                    <th>Price</th>
+                    <th>Qty Sold</th>
+                    <th>Total $</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="right-align">$20.99</td>
+                    <td><input type="number" id="item1Qty" min="0" required></td>
+                    <td><input type="text" id="item1Total" readonly></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="right-align">$12.75</td>
+                    <td><input type="number" id="item2Qty" min="0" required></td>
+                    <td><input type="text" id="item2Total" readonly></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td class="right-align">$9.95</td>
+                    <td><input type="number" id="item3Qty" min="0" required></td>
+                    <td><input type="text" id="item3Total" readonly></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="right-align">$35.89</td>
+                    <td><input type="number" id="item4Qty" min="0" required></td>
+                    <td><input type="text" id="item4Total" readonly></td>
+                </tr>
+                <tr>
+                    <th colspan="3" class="right-align">Total Amount Sold</th>
+                    <td><input type="text" id="totalSold" readonly></td>
+                </tr>
+                <tr>
+                    <th colspan="3" class="right-align">Total Weekly Earnings</th>
+                    <td><input type="text" id="weeklyEarnings" readonly></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="error" id="errorMessage"></div>
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <script>
+        const prices = [20.99, 12.75, 9.95, 35.89];
+
+        document.getElementById('salesForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const quantities = [
+                document.getElementById('item1Qty').value,
+                document.getElementById('item2Qty').value,
+                document.getElementById('item3Qty').value,
+                document.getElementById('item4Qty').value
+            ];
+
+            const totals = [];
+            let valid = true;
+            let totalSold = 0;
+
+            document.getElementById('errorMessage').innerText = '';
+
+            for (let i = 0; i < quantities.length; i++) {
+                const qty = parseInt(quantities[i], 10);
+                if (isNaN(qty) || qty < 0) {
+                    document.getElementById('errorMessage').innerText = "Please enter a valid non-negative number for all quantities.";
+                    valid = false;
+                    break;
+                } else {
+                    const itemTotal = qty * prices[i];
+                    totals.push(itemTotal);
+                    totalSold += itemTotal;
+                }
+            }
+
+            if (!valid) {
+                clearResults();
+                return;
+            }
+
+            document.getElementById('item1Total').value = totals[0].toFixed(2);
+            document.getElementById('item2Total').value = totals[1].toFixed(2);
+            document.getElementById('item3Total').value = totals[2].toFixed(2);
+            document.getElementById('item4Total').value = totals[3].toFixed(2);
+
+            document.getElementById('totalSold').value = totalSold.toFixed(2);
+
+            const commission = totalSold * 0.09;
+            const earnings = 250 + commission;
+            document.getElementById('weeklyEarnings').value = earnings.toFixed(2);
+        });
+
+        function clearResults() {
+            ['item1Total', 'item2Total', 'item3Total', 'item4Total', 'totalSold', 'weeklyEarnings']
+                .forEach(id => document.getElementById(id).value = '');
+        }
+
+        function clearForm() {
+            ['item1Qty', 'item2Qty', 'item3Qty', 'item4Qty'].forEach(id => document.getElementById(id).value = '');
+            clearResults();
+            document.getElementById('errorMessage').innerText = '';
+        }
+    </script>
+
+    <br><br>
+    <a href="./hw3.html">Home</a>
+
+</body>
+
+</html>
