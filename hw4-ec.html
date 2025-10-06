@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Square Generator (Homework 4 - Extra Credit)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #4 Extra Credit">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Square Generator</h1>
+
+    <form id="squareForm">
+        <label for="numberInput">Enter a number (2-10):</label>
+        <input type="text" id="numberInput" name="numberInput">
+        <button type="button" onclick="processNumber()">Generate Square</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function processNumber() {
+            const numberInput = document.getElementById('numberInput');
+            const resultDiv = document.getElementById('result');
+            const inputValue = numberInput.value;
+
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            const num = parseInt(inputValue);
+
+            if (isNaN(num) || num < 2 || num > 10) {
+                resultDiv.classList.add('error');
+                resultDiv.textContent = 'Error: Please enter a valid number between 2 and 10.';
+                return;
+            }
+
+            resultDiv.classList.remove('error'); // Remove error class if valid
+            let square = '';
+
+            for (let i = 0; i < num; i++) {
+                for (let j = 0; j < num; j++) {
+                    if (i === 0 || i === num - 1 || j === 0 || j === num - 1) {
+                        square += '*';
+                    } else {
+                        square += ' ';
+                    }
+                }
+                square += '\n'; // New line after each row
+            }
+            resultDiv.textContent = square;
+        }
+
+        function clearForm() {
+            document.getElementById('numberInput').value = '';
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('result').classList.remove('error');
+        }
+    </script>
+    <br><br>
+    <a href="./hw4.html">Home</a>
+</body>
+
+</html>

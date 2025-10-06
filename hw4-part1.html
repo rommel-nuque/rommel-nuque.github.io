@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Looping Statements (Homework 4 - Part 1)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #3 Functions - Part 1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h1>Looping Statements (Homework 4 - Part 1)</h1>
+
+    <script>
+        let part1_sum = 0;
+        let part1_product = 1;
+        let part1_results = [];
+
+        for (let i = 5; i <= 25; i += 4) {
+            part1_sum = part1_sum + i;
+            part1_product = part1_product * i;
+            part1_results.push(i);
+        }
+
+        let part2_sum = 0;
+        let part2_product = 1;
+        let currentNumber = 3;
+
+        while (currentNumber <= 18) {
+            part2_sum += currentNumber;
+            part2_product *= currentNumber;
+            currentNumber += 3;
+        }
+
+        const for_loop_element = document.createElement('for_loop');
+        for_loop_element.innerHTML = `FOR Loop:<br>The result of 5 + 9 + 13 + 17 + 21 + 25 is ${part1_sum}.<br>The result of 5 * 9 * 13 * 17 * 21 * 25 is ${part1_product}<br><br>`;
+
+        const while_loop_element = document.createElement('while_loop');
+        while_loop_element.innerHTML = `WHILE Loop:<br>The result of 3 + 6 + 9 + 12 + 15 + 18 is ${part2_sum}.<br>The result of 3 * 6 * 9 * 12 * 15 * 18 is ${part2_product}<br><br>`;
+
+        document.body.appendChild(for_loop_element);
+        document.body.appendChild(while_loop_element);
+    </script>
+
+    <br><br>
+    <a href="./hw4.html">Home</a>
+</body>
+
+</html>
