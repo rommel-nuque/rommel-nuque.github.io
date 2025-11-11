@@ -2,72 +2,82 @@
 <html lang="en">
 
 <head>
-    <title>Multiplication Table (Homework 5 - Part 2)</title>
+    <title>US States 2024 Census (Homework 5 - Part 2)</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Homework #5 Multiplication Table - Part 2">
+    <meta name="description" content="Homework #5 US States 2024 Census - Part 2">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Multiplication Table (Homework 4 - Part 2)</h1>
+    <h1>US States 2024 Census (Homework 5 - Part 2)</h1>
 
-    <div id="multiplicationTables">
-        <!-- Tables will be dynamically added here by JavaScript -->
-    </div>
+    <form id="stateForm">
+        <label for="stateInput">Enter State Name or Abbreviation:</label>
+        <input type="text" id="stateInput" name="stateInput" placeholder="e.g., California or CA">
+
+        <button type="button" class="submit" onclick="getStateInfo()">Get State Info</button>
+        <button type="button" class="clear" onclick="clearForm()">Clear</button>
+        <p></p>
+        <label for="outputArea">Result:</label>
+        <textarea id="outputArea" readonly></textarea>
+    </form>
 
     <script>
-        function calculateProduct(number, multiplier) {
-            return number * multiplier;
+        const statesData = [
+            ["CA", "California", "Sacramento", "39,431,263"],
+            ["CO",	"Colorado",	"Denver", "5,957,493"],
+            ["AL", "Alabama", "Montgomery", "5,157,699"],
+            ["AK", "Alaska", "Juneau", "740,133"],
+            ["AZ", "Arizona", "Phoenix", "7,582,384"],
+            ["AR", "Arkansas", "Little Rock", "3,088,354"]
+        ];
+
+        function getStateInfo() {
+            const stateInput = document.getElementById('stateInput').value.trim();
+            const outputArea = document.getElementById('outputArea');
+            outputArea.value = ''; // Clear previous output
+
+            if (stateInput === "") {
+                outputArea.value = "Please enter a state name or abbreviation.";
+                return;
+            }
+
+            const normalizedInput = stateInput.toLowerCase();
+            let foundState = null;
+
+            for (let i = 0; i < statesData.length; i++) {
+                const stateAbbr = statesData[i][0].toLowerCase();
+                const stateName = statesData[i][1].toLowerCase();
+
+                if (normalizedInput === stateAbbr || normalizedInput === stateName) {
+                    foundState = statesData[i];
+                    break;
+                }
+            }
+
+            if (foundState) {
+                outputArea.value = `Thanks for your inquiry, here is the information you requested:\n` +
+                    `State abbr = ${foundState[0]}\n` +
+                    `State Name = ${foundState[1]}\n` +
+                    `Capital = ${foundState[2]}\n` +
+                    `Population = ${foundState[3]}`;
+            } else {
+                const availableStates = statesData.map(state => state[1]).join(", ");
+                outputArea.value = `Sorry, we do not have information about this state! ` +
+                    `We only have information about: ${availableStates}. ` +
+                    `Please enter one of these states.`;
+            }
         }
 
-        const container = document.getElementById('multiplicationTables');
-
-        for (let multiplier = 5; multiplier <= 9; multiplier++) {
-            const tableTitle = document.createElement('h2');
-            tableTitle.textContent = `Multiplication Table of ${multiplier}`;
-            container.appendChild(tableTitle);
-
-            const table = document.createElement('table');
-            const thead = document.createElement('thead');
-            const tbody = document.createElement('tbody');
-
-            const headerRow = document.createElement('tr');
-            const thNumber = document.createElement('th');
-            thNumber.textContent = 'Number';
-            const thMultiplier = document.createElement('th');
-            thMultiplier.textContent = 'Multiplier';
-            const thResult = document.createElement('th');
-            thResult.textContent = 'Result';
-
-            headerRow.appendChild(thNumber);
-            headerRow.appendChild(thMultiplier);
-            headerRow.appendChild(thResult);
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-
-            for (let number = 1; number <= 9; number++) {
-                const row = document.createElement('tr');
-
-                const tdNumber = document.createElement('td');
-                tdNumber.textContent = number;
-
-                const tdMultiplier = document.createElement('td');
-                tdMultiplier.textContent = multiplier;
-
-                const tdResult = document.createElement('td');
-                tdResult.textContent = calculateProduct(number, multiplier);
-
-                row.appendChild(tdNumber);
-                row.appendChild(tdMultiplier);
-                row.appendChild(tdResult);
-                tbody.appendChild(row);
-            }
-            table.appendChild(tbody);
-            container.appendChild(table);
+        function clearForm() {
+            document.getElementById('stateInput').value = '';
+            document.getElementById('outputArea').value = '';
         }
     </script>
+
     <br><br>
     <a href="./hw5.html">Home</a>
+
 </body>
 
 </html>
