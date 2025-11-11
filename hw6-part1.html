@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Math Object (Homework 6 - Part 1)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #6 Math Object - Part 1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Number Operations</h1>
+
+    <form id="numberForm">
+        <label for="numberInput">Enter a number with at least 4 decimal places:</label>
+        <input type="text" id="numberInput" placeholder="e.g., 123.4567">
+        <p id="errorMessage" class="error"></p>
+
+        <button type="button" onclick="processNumber()">Submit</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <label for="outputResult">Output:</label>
+    <textarea id="outputResult" readonly></textarea>
+
+    <script>
+        function processNumber() {
+            const numberInput = document.getElementById('numberInput');
+            const errorMessage = document.getElementById('errorMessage');
+            const outputResult = document.getElementById('outputResult');
+            const inputValue = numberInput.value.trim();
+
+            errorMessage.textContent = ''; // Clear previous error messages
+            outputResult.value = ''; // Clear previous output
+
+            // Validate input for number and at least 4 decimal places
+            const decimalRegex = /^-?\d+\.\d{4,}$/; // Matches number with at least 4 decimals
+            if (!decimalRegex.test(inputValue)) {
+                errorMessage.textContent = 'Invalid input. Please enter a number with at least 4 decimal places.';
+                return;
+            }
+
+            const num = parseFloat(inputValue);
+
+            if (isNaN(num)) {
+                errorMessage.textContent = 'Invalid input. Please enter a valid number.';
+                return;
+            }
+
+            // Perform operations
+            const rounded = Math.round(num);
+            const squareRoot = Math.sqrt(num);
+            const floored = Math.floor(num);
+            const fixedTwoDecimals = num.toFixed(2); // Example of toFixed()
+
+            // Display results
+            let output = `Original Number: ${num}\n\n`;
+
+            // Math.round to the nearest integer
+            output += `Rounded to nearest integer: ${Math.round(num)}\n`;
+            // Calculate square root and round to nearest integer
+            output += `Square root rounded to nearest integer: ${Math.round(Math.sqrt(num))}\n`;
+            // Round to nearest tenths position
+            output += `Rounded to nearest tenths: ${num.toFixed(1)}\n`;
+            // Round to nearest hundredths position
+            output += `Rounded to nearest hundredths: ${num.toFixed(2)}\n`;
+            // Round to nearest thousandths position
+            output += `Rounded to nearest thousandths: ${num.toFixed(3)}\n`;
+
+            outputResult.value = output;
+        }
+
+        function clearForm() {
+            document.getElementById('numberInput').value = '';
+            document.getElementById('errorMessage').textContent = '';
+            document.getElementById('outputResult').value = '';
+        }
+    </script>
+
+    <br><br>
+    <a href="./hw6.html">Home</a>
+
+</body>
+
+</html>

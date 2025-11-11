@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>String Object (Homework 6 - Part 2)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #6 String Object - Part 2">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Character Search in Content</h1>
+
+    <form id="stringSearchForm">
+        <div>
+            <label for="longContent">Enter your long content here:</label>
+            <textarea id="longContent" placeholder="Type your content..."></textarea>
+        </div>
+        <p></p>
+        <div>
+            <label for="searchChar">Enter a single character to search:</label>
+            <input type="text" id="searchChar" maxlength="1" placeholder="Single character">
+        </div>
+        <p></p>
+
+        <button type="button" onclick="searchCharacter()">Submit</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <div>
+        <label for="resultOutput">Output:</label>
+        <textarea id="resultOutput" readonly></textarea>
+    </div>
+
+    <script>
+        function searchCharacter() {
+            const longContent = document.getElementById('longContent').value;
+            const searchChar = document.getElementById('searchChar').value;
+            const resultOutput = document.getElementById('resultOutput');
+
+            // Clear previous output
+            resultOutput.textContent = '';
+
+            if (searchChar.length !== 1) {
+                alert('Please enter exactly one character to search.');
+                return;
+            }
+
+            let count = 0;
+            for (let i = 0; i < longContent.length; i++) {
+                if (longContent[i] === searchChar) {
+                    count++;
+                }
+            }
+
+            if (count > 0) {
+                resultOutput.textContent = `The character '${searchChar}' shows up ${count} time(s) in the content ('${longContent}')`;
+            } else {
+                // Clear the result output area
+                resultOutput.textContent = '';
+
+                // Open a new window for "not found" message
+                const newWindow = window.open('', '_blank', 'width=300,height=100,left=800,top=200');
+                if (newWindow) {
+                    newWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>Search Result</title>
+                            <style>
+                                body { font-family: sans-serif; text-align: center; padding-top: 20px; }
+                                button { padding: 5px 10px; cursor: pointer; margin-top: 10px; }
+                            </style>
+                        </head>
+                        <body>
+                            Search character '${searchChar}' not found.
+                            <button onclick="window.close()">Close Window</button>
+                        </body>
+                        </html>
+                    `);
+                    newWindow.document.close(); // Close the document stream
+                }
+            }
+        }
+    </script>
+
+    <br><br>
+    <a href="./hw6.html">Home</a>
+
+</body>
+
+</html>
+
