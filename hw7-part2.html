@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cookies (Homework 7 - Part 2)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #7 Cookies - Part 2">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Cookies</h1>
+
+    <div id="welcome-message" class="hidden">
+        <h1>Welcome Back, <span id="user-name-display"></span>!</h1>
+    </div>
+
+    <div id="user-form-container" class="hidden">
+        <h1>Welcome! Please enter your details:</h1>
+        <form id="user-form">
+            <label for="name">Full Name:</label>
+            <br>
+            <input type="text" id="name" name="name" required>
+            <br><br>
+            <label for="username">Username:</label>
+            <br>
+            <input type="text" id="username" name="username" required>
+            <br><br>
+            <button type="submit">Save and Continue</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to set a cookie with no 'expires' or 'max-age' attribute, making it a session cookie.
+        // Session cookies are automatically deleted when the user closes the browser session.
+        function setSessionCookie(name, value) {
+            document.cookie = name + "=" + encodeURIComponent(value) + "; path=/";
+        }
+
+        // Function to get a cookie value by name
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+            }
+            return null;
+        }
+
+        // Function to handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const username = document.getElementById('username').value;
+
+            setSessionCookie('user_name', name);
+            setSessionCookie('user_username', username);
+
+            // After saving, reload the page to display the welcome message
+            window.location.reload();
+        }
+
+        // Main logic to check for cookies on page load
+        window.onload = function () {
+            const userName = getCookie('user_name');
+            const userUsername = getCookie('user_username');
+
+            if (userName && userUsername) {
+                // If cookies exist, display the welcome message
+                document.getElementById('user-name-display').textContent = userName;
+                document.getElementById('welcome-message').classList.remove('hidden');
+            } else {
+                // If cookies do not exist (first visit in this session), display the form
+                document.getElementById('user-form-container').classList.remove('hidden');
+                document.getElementById('user-form').addEventListener('submit', handleFormSubmit);
+            }
+        };
+    </script>
+
+    <br><br>
+    <a href="./hw7.html">Home</a>
+
+</body>
+
+</html>

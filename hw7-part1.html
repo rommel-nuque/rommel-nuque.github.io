@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Apply Styles (Homework 7 - Part 1)</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework #7 Apply Styles - Part 1">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <h1>Apply Styles</h1>
+
+    <form id="styleForm">
+        <fieldset>
+            <legend>Background Color:</legend>
+
+            <label for="bgColorWhite">
+                <input type="radio" id="bgColorWhite" name="bgColor" value="white" checked> Whites
+            </label>
+
+            <label for="bgColorLightBlue">
+                <input type="radio" id="bgColorLightBlue" name="bgColor" value="lightblue"> Light Blue
+            </label>
+
+            <label for="bgColorLightGreen">
+                <input type="radio" id="bgColorLightGreen" name="bgColor" value="lightgreen"> Light Green
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Text Styles:</legend>
+
+            <label for="underline">
+                <input type="checkbox" id="underline" name="textStyle" value="underline"> Underline
+            </label>
+
+            <label for="bold">
+                <input type="checkbox" id="bold" name="textStyle" value="bold"> Bold
+            </label>
+
+            <label for="italic">
+                <input type="checkbox" id="italic" name="textStyle" value="italic"> Italic
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Font Size:</legend>
+            <label for="fontSize">Select Font Size:</label>
+            <select id="fontSize">
+                <option value="1em">Normal (1em)</option>
+                <option value="1.2rem">Large (1.2rem)</option>
+                <option value="150%">Larger (150%)</option>
+                <option value="0.8em">Small (0.8em)</option>
+            </select>
+        </fieldset>
+    </form>
+
+    <main id="contentArea">
+        <p>This is the first paragraph within the content area. The styles selected by the user will be applied here
+            dynamically.</p>
+        <p>This is the second paragraph. Observe how the background color, text styles, and font size change instantly with
+            your selections.</p>
+        <p>This is the third paragraph. Feel free to experiment with different combinations of styles to see the immediate
+            effects.</p>
+    </main>
+
+    <script>
+        const contentArea = document.getElementById('contentArea');
+        const styleForm = document.getElementById('styleForm');
+
+        function applyStyles() {
+            const selectedBgColor = document.querySelector('input[name="bgColor"]:checked').value;
+            contentArea.style.backgroundColor = selectedBgColor;
+
+            contentArea.style.textDecoration = document.getElementById('underline').checked ? 'underline' : 'none';
+            contentArea.style.fontWeight = document.getElementById('bold').checked ? 'bold' : 'normal';
+            contentArea.style.fontStyle = document.getElementById('italic').checked ? 'italic' : 'normal';
+
+            const selectedFontSize = document.getElementById('fontSize').value;
+            contentArea.style.fontSize = selectedFontSize;
+        }
+
+        styleForm.addEventListener('change', applyStyles);
+        applyStyles();
+    </script>
+
+    <br><br>
+    <a href="./hw7.html">Home</a>
+
+</body>
+
+</html>

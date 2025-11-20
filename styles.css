@@ -68,21 +68,16 @@ table {
 th,
 td {
     border: 1px solid black;
-    /* Sets a 1px solid black border for cells */
     padding: 8px;
-    /* Adds spacing within cells */
     text-align: left;
 }
 
 th {
     background-color: #f2f2f2;
-    /* Optional: adds a background color to header cells */
 }
 
-/* Style for odd-numbered rows */
 tbody tr:nth-child(odd) {
     background-color: #f2f2f2;
-    /* Light gray */
 }
 
 /* Style for even-numbered rows */
@@ -119,4 +114,25 @@ select {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+#contentArea {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    min-height: 150px;
+}
+
+fieldset {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+legend {
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
 }
