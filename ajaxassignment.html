@@ -29,7 +29,7 @@
 		function myFunction(xml) {
 			const xmlDoc = xml.responseXML;
 			const x = xmlDoc.getElementsByTagName("CD");
-			let table="<tr><th>Artist</th><th>Title</th></tr>";
+			let table="<tr><th>Artist</th><th>Title</th><th>Year</th><th>Country</th><th>Company</th><th>Price</th></tr>";
 
 			for (let i = 0; i <x.length; i++) {
 				table += "<tr><td>" +
