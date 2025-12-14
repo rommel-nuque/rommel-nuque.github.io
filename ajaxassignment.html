@@ -17,26 +17,16 @@
 
 	<script>
 		function loadDoc() {
-			alert("loadDoc")
 			const xhttp = new XMLHttpRequest();
-
-			alert("xhttp: " + xhttp)
-
 			xhttp.onload = function() {
 				myFunction(this);
 			}
 
-			alert("after xhttp.onload")
-
 			xhttp.open("GET", "cd_catalog.xml");
 			xhttp.send();
-
-			alert("after xhttp.send")
 		}
 
 		function myFunction(xml) {
-			alert("myFunction")
-
 			const xmlDoc = xml.responseXML;
 			const x = xmlDoc.getElementsByTagName("CD");
 			let table="<tr><th>Artist</th><th>Title</th></tr>";
@@ -53,6 +43,7 @@
 		}
 	</script>
 
+	<br><br>
 	<a href="./index.html">Home</a>
 </body>
 </html>
