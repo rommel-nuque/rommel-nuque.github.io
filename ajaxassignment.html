@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Javascript/AJAX Programming (CIS114) Homework #8</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Javascript/AJAX Programming (CIS114) homework #8">
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<h1>Homework #8 - AJAX Application</h1>
+
+	<button type="button" onclick="loadDoc()">Get CD collection</button>
+	<br><br>
+	<table id="demo"></table>
+
+	<script>
+		function loadDoc() {
+			alert("loadDoc")
+			const xhttp = new XMLHttpRequest();
+
+			alert("xhttp: " + xhttp)
+
+			xhttp.onload = function() {
+				myFunction(this);
+			}
+
+			alert("after xhttp.onload")
+
+			xhttp.open("GET", "cd_catalog.xml");
+			xhttp.send();
+
+			alert("after xhttp.send")
+		}
+
+		function myFunction(xml) {
+			alert("myFunction")
+
+			const xmlDoc = xml.responseXML;
+			const x = xmlDoc.getElementsByTagName("CD");
+			let table="<tr><th>Artist</th><th>Title</th></tr>";
+
+			for (let i = 0; i <x.length; i++) {
+				table += "<tr><td>" +
+				x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+				"</td><td>" +
+				x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+				"</td></tr>";
+			}
+
+			document.getElementById("demo").innerHTML = table;
+		}
+	</script>
+
+	<a href="./index.html">Home</a>
+</body>
+</html>
